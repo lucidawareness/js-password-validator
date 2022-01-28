@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Validator</title>
+    <link rel="stylesheet" href="css/style.css ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+<div class="container text-center">
+    <h1 class="pt-3">Please Login</h1>
+    <p class="p-2 mt-2 border bg-primary text-white">Your password should contain at least 6 characters, 1 number and 1 capital letter.</p>
+    <p class="p-2">Enter Password:<br><input id="password" type="password"></p>
+    <p class="p-2">Re-enter Password:<br><input id="password2" type="password"></p>
+    <button id="submit" onclick="check()">Submit</button>
+    <p class="p-2 text-danger" id="error"></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+<script>
+
+		function check() {
+			let password = document.getElementById("password").value;
+			let password2 = document.getElementById("password2").value;
+			let errorMessage = document.getElementById("error");
+			let errorToThrow = "";
+			try {
+				if (password.length < 6) {
+					errorToThrow += "<br> Password too short.";
+				}
+				if (/[A-Z]/g.test(password) === false) {
+					errorToThrow += "<br> Password should include at least one capital letter.";
+				}
+				if (/\d/g.test(password) === false) {
+					errorToThrow += "<br> Password should include at least one digit.";
+				}
+				if (password !== password2) {
+					errorToThrow += "<br> Passwords should match.";
+				}
+				throw errorToThrow;
+			} catch (err) {
+				errorMessage.innerHTML = err;
+			}
+		}
+</script>
+</body>
+</html>
